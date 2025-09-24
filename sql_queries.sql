@@ -20,6 +20,15 @@ JOIN orders o ON oi.order_id = o.order_id
 GROUP BY pr.product_id
 ORDER BY total_revenue DESC;
 
+-- Best-Selling Products (by units)
+SELECT pr.product_name, pr.category, SUM(oi.quantity) AS total_units_sold
+FROM products pr
+JOIN order_items oi ON pr.product_id = oi.product_id
+GROUP BY pr.product_id, pr.product_name, pr.category
+ORDER BY total_units_sold DESC
+LIMIT 2;
+
+
 
 -- Monthly Sales Report
 SELECT DATE_FORMAT(p.payment_date, '%Y-%m') AS month,
